@@ -12,7 +12,7 @@ const projectsData = [
     image: "./ressources/altf4.png",
     technologies: ["Kotlin", "Android Studio", "Figma"],
     livrables: [
-      { name: "Dépôt GitHub", url: "https://github.com/nbillaud1/task_list_app.git" }
+      { name: "Code source complet (GitHub)", url: "https://github.com/nbillaud1/task_list_app.git" }
     ],
     gallery: [
       "./ressources/altf4-1.png",
@@ -43,7 +43,10 @@ const projectsData = [
     role: "Développeur Back-end",
     isGroup: true,
     roleDetail: "Participation majeure dans la partie back-end du projet. Création du système de périodicité des rappels pour les mails automatiques envoyés aux professeurs et vacataires pour le remplissage et/ou la validation de fiches ressource. Implémentation du serveur Postfix prévu à cet effet.",
-    competence: "Administrer - Niveau 2 : Déployer des services dans une architecture réseau.",
+    competence: [
+      "Administrer - Niveau 2 : Déployer des services dans une architecture réseau.",
+      "Collaborer - Niveau 2 : Situer son rôle et ses missions au sein d'une équipe informatique."
+    ],
     summary: "ERP centralisé pour la gestion des fiches ressources de l'administration de l'IUT.",
     description: "L'objectif de notre équipe était de développer un ERP centralisé pour le corps enseignant et de l'administration de notre IUT afin d'alléger leur charge administrative. Ce site internet permet aux professeurs de remplir leurs fiches ressources et à l'administration de gérer les utilisateurs.",
     image: "./ressources/erp.png",
@@ -57,7 +60,8 @@ const projectsData = [
     ],
     apprentissagesCritiques: [
       { id: "AC23.01", description: "Concevoir et développer des applications communicantes" },
-      { id: "AC23.02", description: "Utiliser des serveurs et des services réseaux virtualisés" }
+      { id: "AC23.02", description: "Utiliser des serveurs et des services réseaux virtualisés" },
+      { id: "AC26.03", description: "Mobiliser les compétences interpersonnelles pour travailler dans une équipe informatique" }
     ],
     difficulties: [
       "Montée en compétence en SpringBoot et View JS.",
@@ -115,33 +119,34 @@ const projectsData = [
     year: "2026",
     role: "Développeur Fullstack",
     isGroup: false,
-    competence: "Optimiser - Niveau 2 : Utiliser des techniques algorithmiques adaptées pour des problèmes complexes.",
-    summary: "Petit jeu-vidéo sur PC codé en C# et réalisé sur Unity.",
-    description: "J'ai réalisé un petit jeu-vidéo ou le joueur incarne un chevalier (ou chevalière !) dont le but est de défendre un cochon allongé dans une forêt. Des ennemis apparaissent à droite et à gauche de l'écran et se dirigent vers le milieu du niveau pour tuer le cochon. Le joueur peut se déplacer, attaquer, sauter. (Le jeu n'est pas complètement terminé, plus de fonctionnalités sont à prévoir !)",
-    image: "./ressources/ptp.png",
-    technologies: ["C#", "Unity 6"],
-    livrables: [],
+    competence: "Réaliser - Niveau 2 : Partir des exigences et aller jusqu'à une application complète.",
+    summary: "Site web similaire à Netflix réalisé en JavaScript",
+    description: "J'ai réalisé un site web similaire à Netflix concernant la location de films. J'ai réalisé l'interface utilisateur, en front-end, à l'aide de Express et Node.JS, ainsi qu'un back-end fonctionnel avec un système de routage sécurisé et une base de données MongoDB en NoSQL. La structure de mon projet repose sur le principe MERN en Développement Web.",
+    image: "./ressources/web.png",
+    technologies: ["JavaScript", "JSON", "NoSQL", "React", "Express", "MERN"],
+    livrables: [
+      { name: "Code source complet (GitHub)", url: "https://github.com/rtaero-14/projet-netflix.git" }
+    ],
     gallery: [
-      "./ressources/ptp-1.png",
-      "./ressources/ptp-code.png"
+      "./ressources/web-1.png",
+      "./ressources/web-code.png"
     ],
     apprentissagesCritiques: [
-      { id: "AC22.01", description: "Choisir des structures de données complexes adaptées au problème" },
-      { id: "AC22.02", description: "Utiliser des techniques algorithmiques adaptées pour des problèmes complexes" }
+      { id: "AC21.02", description: "Appliquer des principes d’accessibilité et d’ergonomie." },
+      { id: "AC21.03", description: "Adopter de bonnes pratiques de conception et de programmation." }
     ],
     difficulties: [
-      "Découverte de Unity et de son interface.",
-      "Montée en compétence en C#.",
-      "Implémentation de nouvelles fonctionnalités."
+      "Utilisation de MERN",
+      "Routage sécurisé et navigation fluide",
+      "Création de composants pour l'interface utilisateur"
     ],
     skills: [
-      "Conception de l'interface graphique on Unity.",
-      "Réalisation de la logique métier pour le comportement du personnage du Joueur, du cochon et des ennemis.",
-      "Réalisation de la logique pour les collisions, le système de points de vie, de dégâts et timer."
+      "Maîtrise des bases en JavaScript (React, Express, Node)",
+      "Maîtrise des bases en NoSQL sur MongoDB"
     ],
     accent: {
-      color: "#ff3b3b",
-      glow: "rgba(255, 59, 59, 0.35)"
+      color: "#f1c40f",
+      glow: "rgba(241, 196, 15, 0.35)"
     }
   }
 ];

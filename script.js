@@ -176,9 +176,12 @@ function renderDetailPage() {
 
       <section class="detail-main">
         <section class="detail-section">
-          <h2 class="detail-section-title">Compétence Démontrée</h2>
+          <h2 class="detail-section-title">Compétence(s) Démontrée(s)</h2>
           <div class="detail-tags">
-            <span class="detail-tag" style="background: color-mix(in srgb, var(--accent) 20%, #000 80%); border-color: var(--accent);">${project.competence || "Non spécifiée"}</span>
+            ${Array.isArray(project.competence) 
+              ? project.competence.map(comp => `<span class="detail-tag" style="background: color-mix(in srgb, var(--accent) 20%, #000 80%); border-color: var(--accent); margin-bottom: 0.5rem;">${comp}</span>`).join("")
+              : `<span class="detail-tag" style="background: color-mix(in srgb, var(--accent) 20%, #000 80%); border-color: var(--accent);">${project.competence || "Non spécifiée"}</span>`
+            }
           </div>
         </section>
 
@@ -213,8 +216,8 @@ function renderDetailPage() {
           ${project.gallery && project.gallery.length > 0 ? `
           <div class="detail-grid mt-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
             ${project.gallery.map((img) => `
-              <div class="detail-card" style="padding: 0.5rem; overflow: hidden; display: flex; align-items: center; justify-content: center; aspect-ratio: 16/9; border-color: color-mix(in srgb, var(--accent) 40%, transparent);">
-                <img src="${img}" alt="Capture d'écran" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="detail-card" style="padding: 0.5rem; overflow: hidden; display: flex; align-items: center; justify-content: center; aspect-ratio: 16/9; border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: #000;">
+                <img src="${img}" alt="Capture d'écran" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
               </div>
             `).join("")}
           </div>
@@ -238,6 +241,7 @@ function renderDetailPage() {
     </main>
   `;
 }
+
 if (document.body.dataset.page === "home") {
   renderHomeCards();
 }
