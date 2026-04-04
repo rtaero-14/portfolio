@@ -152,15 +152,7 @@ function renderDetailPage() {
 
   const project = getProjectFromUrl();
   if (!project) {
-    root.innerHTML = `
-      <main class="detail-page d-flex align-items-center justify-content-center">
-        <section class="empty-state">
-          <h1>Projet introuvable</h1>
-          <p class="hero-subtitle">Le projet demandé n'existe pas ou n'a pas encore été configuré.</p>
-          <a class="detail-back mt-3 d-inline-block" href="./index.html">Retour au portfolio</a>
-        </section>
-      </main>
-    `;
+    root.innerHTML = `<main class="detail-page d-flex align-items-center justify-content-center"><section class="empty-state"><h1>Projet introuvable</h1><a class="detail-back mt-3 d-inline-block" href="./index.html">Retour au portfolio</a></section></main>`;
     return;
   }
 
@@ -168,11 +160,9 @@ function renderDetailPage() {
   root.innerHTML = `
     <main class="detail-page">
       <section class="detail-hero">
-        <div class="detail-hero-media">
-          <img src="${project.image}" alt="${project.title}">
-        </div>
+        <div class="detail-hero-media"><img src="${project.image}" alt="${project.title}"></div>
         <div class="detail-overlay"></div>
-        <a class="detail-back" href="./index.html"><- Retour</a>
+        <a class="detail-back" href="./index.html">Retour</a>
         <div class="detail-content">
           <span class="detail-year">${project.year}</span>
           <h1 class="detail-title">${project.title}</h1>
@@ -186,43 +176,68 @@ function renderDetailPage() {
 
       <section class="detail-main">
         <section class="detail-section">
-          <h2 class="detail-section-title">Technologies Utilisées</h2>
+          <h2 class="detail-section-title">Compétence Démontrée</h2>
           <div class="detail-tags">
-            ${project.technologies.map((tech) => `<span class="detail-tag">${tech}</span>`).join("")}
+            <span class="detail-tag" style="background: color-mix(in srgb, var(--accent) 20%, #000 80%); border-color: var(--accent);">${project.competence || "Non spécifiée"}</span>
+          </div>
+        </section>
+
+        ${project.isGroup ? `
+        <section class="detail-section">
+          <h2 class="detail-section-title">Mon rôle dans le projet</h2>
+          <article class="detail-card">
+            <p class="mb-0">${project.roleDetail}</p>
+          </article>
+        </section>
+        ` : ''}
+
+        <section class="detail-section">
+          <h2 class="detail-section-title">Apprentissages Critiques (AC)</h2>
+          <div class="detail-grid">
+            ${(project.apprentissagesCritiques || []).map((ac) => `<article class="detail-card"><span class="detail-tag mb-3 d-inline-block" style="border-style: solid; background: rgba(255,255,255,0.05); border-color: var(--muted); font-size: 0.85rem; padding: 0.3rem 0.7rem;">${ac.id}</span><p class="mb-0">${ac.description}</p></article>`).join("")}
           </div>
         </section>
 
         <section class="detail-section">
-          <h2 class="detail-section-title">Défis Techniques</h2>
+          <h2 class="detail-section-title">Technologies & Livrables</h2>
+          <div class="detail-tags mb-3">
+            ${(project.technologies || []).map((tech) => `<span class="detail-tag">${tech}</span>`).join("")}
+          </div>
+          <div class="detail-tags">
+            ${(project.livrables || []).map((l) => {
+              if (typeof l === 'object') return `<a href="${l.url}" target="_blank" class="detail-tag" style="border-style: dashed; text-decoration: none; color: inherit;">🔗 ${l.name}</a>`;
+              return `<span class="detail-tag" style="border-style: dashed;">📄 ${l}</span>`;
+            }).join("")}
+          </div>
+          
+          ${project.gallery && project.gallery.length > 0 ? `
+          <div class="detail-grid mt-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            ${project.gallery.map((img) => `
+              <div class="detail-card" style="padding: 0.5rem; overflow: hidden; display: flex; align-items: center; justify-content: center; aspect-ratio: 16/9; border-color: color-mix(in srgb, var(--accent) 40%, transparent);">
+                <img src="${img}" alt="Capture d'écran" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.5rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </div>
+            `).join("")}
+          </div>
+          ` : ''}
+        </section>
+
+        <section class="detail-section">
+          <h2 class="detail-section-title">Analyse Réflexive : Difficultés</h2>
           <div class="detail-grid">
-            ${project.challenges
-              .map((challenge, index) => `
-                <article class="detail-card">
-                  <div class="detail-number">${index + 1}</div>
-                  <p class="mb-0">${challenge}</p>
-                </article>
-              `)
-              .join("")}
+            ${(project.difficulties || []).map((d, i) => `<article class="detail-card"><div class="detail-number">${i + 1}</div><p class="mb-0">${d}</p></article>`).join("")}
           </div>
         </section>
 
         <section class="detail-section">
-          <h2 class="detail-section-title">Résultats</h2>
+          <h2 class="detail-section-title">Analyse Réflexive : Savoirs Acquis</h2>
           <div class="detail-grid">
-            ${project.results
-              .map((result) => `
-                <article class="detail-card result-card">
-                  <p class="mb-0">${result}</p>
-                </article>
-              `)
-              .join("")}
+            ${(project.skills || []).map((s) => `<article class="detail-card result-card"><p class="mb-0">✅ ${s}</p></article>`).join("")}
           </div>
         </section>
       </section>
     </main>
   `;
 }
-
 if (document.body.dataset.page === "home") {
   renderHomeCards();
 }
